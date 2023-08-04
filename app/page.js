@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
 import useTodoStore from "./store";
-import { v4 as uuidv4 } from 'uuid';
 
 export default function Home() {
   const {addTodo,removeTodo,todos,toggleCompleted} = useTodoStore((state) => ({
@@ -10,11 +9,6 @@ export default function Home() {
     todos:state.todos,
     toggleCompleted:state.toggleCompleted
   }));
-
-  let uuid;
-  if (typeof window !== "undefined") {
-    uuid = require('uuid').v4;
-  }
 
   const [todo, setTodo] = useState("");
 
@@ -26,7 +20,7 @@ export default function Home() {
     if(todo.length===0){
       alert('Todos cant be empty');
     }else{
-      const id = uuid(); 
+      const id = Math.ceil(Math.random()*100000000000); 
     addTodo({
       id:id,
       name: todo,
